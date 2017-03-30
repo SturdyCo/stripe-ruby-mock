@@ -3,8 +3,13 @@ module StripeMock
     module BalanceTransactions
 
       def BalanceTransactions.included(klass)
+        klass.add_handler 'get /v1/balance',               :get_balance
         klass.add_handler 'get /v1/balance/history/(.*)',  :get_balance_transaction
         klass.add_handler 'get /v1/balance/history',       :list_balance_transactions
+      end
+
+      def get_balance(route, method_url, params, headers)
+        Data.mock_balance(params)
       end
 
       def get_balance_transaction(route, method_url, params, headers)

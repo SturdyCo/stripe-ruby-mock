@@ -884,6 +884,22 @@ module StripeMock
       }
     end
 
+    def self.mock_balance(params = {})
+      {
+        object: 'balance',
+        "available": [
+          {
+            "currency": "usd",
+            "amount": 455,
+            "source_types": {
+              "card": 455
+            }
+          }
+        ],
+        "livemode": false
+      }.merge(params)
+    end
+
     def self.mock_balance_transactions(ids=[])
       bts = {}
       ids.each do |id|
